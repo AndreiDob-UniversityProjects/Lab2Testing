@@ -19,34 +19,72 @@ import static org.junit.Assert.*;
 /**
  * Unit test for simple App.
  */
-public class AppTest 
-{
+public class AppTest {
     Service service;
+
     /**
      * Rigorous Test :-)
      */
     @Before
-    public void doBefore(){
+    public void doBefore() {
         Validator<Student> studentValidator = new StudentValidator();
         Validator<Tema> temaValidator = new TemaValidator();
         Validator<Nota> notaValidator = new NotaValidator();
 
-        StudentXMLRepository fileRepository1 = new StudentXMLRepository(studentValidator, "studenti.xml");
-        TemaXMLRepository fileRepository2 = new TemaXMLRepository(temaValidator, "teme.xml");
-        NotaXMLRepository fileRepository3 = new NotaXMLRepository(notaValidator, "note.xml");
+        StudentXMLRepository fileRepository1 = new StudentXMLRepository(studentValidator, "studenti_test.xml");
+        TemaXMLRepository fileRepository2 = new TemaXMLRepository(temaValidator, "teme_test.xml");
+        NotaXMLRepository fileRepository3 = new NotaXMLRepository(notaValidator, "note_test.xml");
+
 
         this.service = new Service(fileRepository1, fileRepository2, fileRepository3);
-    }
-    @Test
-    public void studentIdIsEmpty()
-    {
-        assertEquals( service.saveStudent("","aaa",932),1 );
+        for(Student s :service.findAllStudents()){
+            service.deleteStudent(s.getID());
+        }
     }
 
     @Test
-    public void studentIdIsOk()
-    {
-        assertEquals( service.saveStudent("13","aaa",932),0 );
+    public void studentIdIsEmpty() {
+        assertEquals(2, service.saveStudent("", "aaa", 932));
     }
 
+    @Test
+    public void studentIdIsOk() {
+        assertEquals(1, service.saveStudent("13", "aaa", 932));
+    }
+
+    @Test
+    public void studentNameIsEmpty() {
+        assertEquals(2, service.saveStudent("15", "", 932));
+    }
+
+    @Test
+    public void studentNameIsOk() {
+        assertEquals(1, service.saveStudent("16", "aaa", 932));
+    }
+
+    @Test
+    public void studentGroupTooSmall() {
+        assertEquals(2, service.saveStudent("15", "aaa", 5));
+    }
+
+    @Test
+    public void studentGroupTooBig() {
+        assertEquals(2, service.saveStudent("15", "aaa", 1000));
+    }
+
+    @Test
+    public void studentGroupOk() {
+        assertEquals(1, service.saveStudent("15", "aaa", 932));
+    }
+    //student.getGrupa() <= 110 || student.getGrupa() >= 938) {
+
+    @Test
+    public void studentGroupLowerBound() {
+        assertEquals(1, service.saveStudent("15", "aaa", 111));
+    }
+
+    @Test
+    public void studentGroupUpperBound() {
+        assertEquals(1, service.saveStudent("15", "aaa", 937));
+    }
 }

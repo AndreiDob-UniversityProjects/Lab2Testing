@@ -2,6 +2,7 @@ package lab2testing.service;
 
 import lab2testing.domain.*;
 import lab2testing.repository.*;
+import lab2testing.validation.ValidationException;
 
 import java.time.LocalDate;
 import java.time.temporal.WeekFields;
@@ -24,14 +25,22 @@ public class Service {
 
     public Iterable<Nota> findAllNote() { return notaXmlRepo.findAll(); }
 
+    //PROBLEM SOLVED: if the validation fails, the code still returns null (converted to 1 then) and makes the ui print
+    //that the studdent was sucessfully added
     public int saveStudent(String id, String nume, int grupa) {
         Student student = new Student(id, nume, grupa);
-        Student result = studentXmlRepo.save(student);
-
-        if (result == null) {
-            return 1;
+        try {
+            Student result = studentXmlRepo.save(student);
+            if (result == null) {
+                return 1;
+            }
+            return 0;
         }
-        return 0;
+        catch(ValidationException e){
+            return 2;
+        }
+
+
     }
 
     public int saveTema(String id, String descriere, int deadline, int startline) {

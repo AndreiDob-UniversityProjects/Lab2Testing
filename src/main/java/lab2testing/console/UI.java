@@ -62,11 +62,16 @@ public class UI {
         System.out.println("Introduceti grupa studentului: ");
         int grupa = scanner.nextInt();
 
-        if (service.saveStudent(id, nume, grupa) != 0) {
+        //PROBLEM SOLVED: if the validation fails, the code still returns null (converted to 1 then) and makes the ui print this
+        int result=service.saveStudent(id, nume, grupa);
+        if (result ==1) {
             System.out.println("Student adaugat cu succes! \n");
         }
+        else if(result==0){
+            System.out.println("Student existent! \n");
+        }
         else {
-            System.out.println("Student existent sau invalid! \n");
+            System.out.println("Student invalid! \n");
         }
     }
 
