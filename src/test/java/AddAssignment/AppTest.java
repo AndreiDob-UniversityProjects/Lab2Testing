@@ -47,7 +47,7 @@ public class AppTest {
 
     @Test
     public void addAssignmentWithIncorrectInverval() {
-        assert 2 == service.saveTema("3", "Scurt/2.", 1, 7);
+        assert 2 == service.saveTema("3", "Scurt.", 1, 7);
     }
 
     @Test
