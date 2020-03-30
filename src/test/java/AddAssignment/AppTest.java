@@ -19,6 +19,11 @@ public class AppTest {
     }
 
     @Test
+    public void addAssignmentWithNullId() {
+        assert 2 == service.saveTema(null, "Scurt.", 10, 2);
+    }
+
+    @Test
     public void addAssignmentWithOkId() {
         assert 0 == service.saveTema("1", "Scurt.", 10, 2);
     }
