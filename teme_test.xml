@@ -5,6 +5,11 @@
 <Deadline>11</Deadline>
 <Startline>3</Startline>
 </tema>
+<tema ID="100">
+<Descriere>Skip</Descriere>
+<Deadline>10</Deadline>
+<Startline>2</Startline>
+</tema>
 <tema ID="2">
 <Descriere>ww</Descriere>
 <Deadline>12</Deadline>
