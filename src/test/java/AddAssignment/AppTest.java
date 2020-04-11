@@ -34,6 +34,11 @@ public class AppTest {
     }
 
     @Test
+    public void addAssignmentWithNullDescription() {
+        assert 2 == service.saveTema("2", null, 10, 2);
+    }
+
+    @Test
     public void addAssignmentWithOkDescription() {
         assert 0 == service.saveTema("2", "Scurt/2.", 10, 2);
     }
@@ -41,12 +46,20 @@ public class AppTest {
     @Test
     public void addAssignmentWithInvalidStartlines() {
         assert 2 == service.saveTema("3", "Scurt/2.", 10, -1);
+    }
+
+    @Test
+    public void addAssignmentWithInvalidStartline_() {
         assert 2 == service.saveTema("3", "Scurt/2.", 10, 15);
     }
 
     @Test
     public void addAssignmentWithInvalidDeadlines() {
         assert 2 == service.saveTema("3", "Scurt/2.", -1, 1);
+    }
+
+    @Test
+    public void addAssignmentWithInvalidDeadline_() {
         assert 2 == service.saveTema("3", "Scurt/2.", 15, 1);
     }
 
@@ -58,5 +71,17 @@ public class AppTest {
     @Test
     public void addAssignmentWithOkInterval() {
         assert 0 == service.saveTema("3", "Scurt/2.", 6, 2);
+    }
+
+    @Test
+    public void addAlreadyExistentAssignment() {
+        service.saveTema("100", "Skip", 10, 2);
+        assert 0 == service.saveTema("100", "Scurt/2.", 6, 2);
+    }
+
+    @Test
+    public void addNewAssignment(){
+        service.deleteTema("100");
+        assert 1 == service.saveTema("100", "Skip", 10, 2);
     }
 }
