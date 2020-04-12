@@ -37,10 +37,12 @@ public class AppTest {
 
 
         this.service = new Service(fileRepository1, fileRepository2, fileRepository3);
-        for(Student s :service.findAllStudents()){
+        for (Student s : service.findAllStudents()) {
             service.deleteStudent(s.getID());
         }
     }
+
+    //EC
 
     @Test
     public void studentIdIsEmpty() {
@@ -62,21 +64,22 @@ public class AppTest {
         assertEquals(1, service.saveStudent("16", "aaa", 932));
     }
 
+    //BVA
+
     @Test
     public void studentGroupTooSmall() {
-        assertEquals(2, service.saveStudent("15", "aaa", 5));
+        assertEquals(2, service.saveStudent("15", "aaa", 110));
     }
 
     @Test
     public void studentGroupTooBig() {
-        assertEquals(2, service.saveStudent("15", "aaa", 1000));
+        assertEquals(2, service.saveStudent("15", "aaa", 938));
     }
 
     @Test
     public void studentGroupOk() {
         assertEquals(1, service.saveStudent("15", "aaa", 932));
     }
-    //student.getGrupa() <= 110 || student.getGrupa() >= 938) {
 
     @Test
     public void studentGroupLowerBound() {
