@@ -1,7 +1,12 @@
 package lab2testing.service;
 
-import lab2testing.domain.*;
-import lab2testing.repository.*;
+import lab2testing.domain.Nota;
+import lab2testing.domain.Pair;
+import lab2testing.domain.Student;
+import lab2testing.domain.Tema;
+import lab2testing.repository.NotaXMLRepository;
+import lab2testing.repository.StudentXMLRepository;
+import lab2testing.repository.TemaXMLRepository;
 import lab2testing.validation.ValidationException;
 
 import java.time.LocalDate;
@@ -43,15 +48,18 @@ public class Service {
 
     public int saveTema(String id, String descriere, int deadline, int startline) {
         Tema tema = new Tema(id, descriere, deadline, startline);
-        try{
+        int ret;
+        try {
             Tema result = temaXmlRepo.save(tema);
             if (result == null) {
-                return 1;
+                ret = 1;
+            } else {
+                ret = 0;
             }
-            return 0;
-        } catch(ValidationException e){
-            return 2;
+        } catch (ValidationException e) {
+            ret = 2;
         }
+        return ret;
     }
 
     public int saveNota(String idStudent, String idTema, double valNota, int predata, String feedback) {
