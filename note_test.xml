@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Entitati>
-
+    <nota IDStudent="1" IDTema="1">
+        <Nota>9.0</Nota>
+        <SaptamanaPredare>11</SaptamanaPredare>
+        <Feedback>bun</Feedback>
+    </nota>
+    <nota IDStudent="2" IDTema="2">
+        <Nota>6.5</Nota>
+        <SaptamanaPredare>11</SaptamanaPredare>
+        <Feedback>si mai bun</Feedback>
+    </nota>
 </Entitati>

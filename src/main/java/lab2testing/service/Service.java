@@ -24,11 +24,17 @@ public class Service {
         this.notaXmlRepo = notaXmlRepo;
     }
 
-    public Iterable<Student> findAllStudents() { return studentXmlRepo.findAll(); }
+    public Iterable<Student> findAllStudents() {
+        return studentXmlRepo.findAll();
+    }
 
-    public Iterable<Tema> findAllTeme() { return temaXmlRepo.findAll(); }
+    public Iterable<Tema> findAllTeme() {
+        return temaXmlRepo.findAll();
+    }
 
-    public Iterable<Nota> findAllNote() { return notaXmlRepo.findAll(); }
+    public Iterable<Nota> findAllNote() {
+        return notaXmlRepo.findAll();
+    }
 
     //PROBLEM SOLVED: if the validation fails, the code still returns null (converted to 1 then) and makes the ui print
     //that the studdent was sucessfully added
@@ -40,8 +46,7 @@ public class Service {
                 return 1;
             }
             return 0;
-        }
-        catch(ValidationException e){
+        } catch (ValidationException e) {
             return 2;
         }
     }
@@ -63,25 +68,29 @@ public class Service {
     }
 
     public int saveNota(String idStudent, String idTema, double valNota, int predata, String feedback) {
-        if (studentXmlRepo.findOne(idStudent) == null || temaXmlRepo.findOne(idTema) == null) {
-            return -1;
-        }
-        else {
-            int deadline = temaXmlRepo.findOne(idTema).getDeadline();
+        try {
+            if (studentXmlRepo.findOne(idStudent) == null || temaXmlRepo.findOne(idTema) == null) {
+                return -1;
+            } else {
+                int deadline = temaXmlRepo.findOne(idTema).getDeadline();
 
-            if (predata - deadline > 2) {
-                valNota =  1;
-            }
-            if(predata>deadline){
-                valNota =  valNota - 2.5 * (predata - deadline);
-            }
-            Nota nota = new Nota(new Pair(idStudent, idTema), valNota, predata, feedback);
-            Nota result = notaXmlRepo.save(nota);
+                if (predata - deadline > 2) {
+                    valNota = 1;
+                }
+                if (predata > deadline) {
+                    valNota = valNota - 2.5 * (predata - deadline);
+                }
+                Nota nota = new Nota(new Pair(idStudent, idTema), valNota, predata, feedback);
 
-            if (result == null) {
-                return 1;
+                Nota result = notaXmlRepo.save(nota);
+                if (result == null) {
+                    return 1;
+                }
+                return 0;
+
             }
-            return 0;
+        } catch (Throwable e) {
+            return 2;
         }
     }
 
@@ -102,6 +111,7 @@ public class Service {
         }
         return 1;
     }
+
 
     public int updateStudent(String id, String numeNou, int grupaNoua) {
         Student studentNou = new Student(id, numeNou, grupaNoua);
