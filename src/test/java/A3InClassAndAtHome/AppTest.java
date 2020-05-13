@@ -1,4 +1,4 @@
-package A3InClass;
+package A3InClassAndAtHome;
 
 import lab2testing.domain.Nota;
 import lab2testing.domain.Student;

@@ -4,4 +4,12 @@
         <Nume>aaa</Nume>
         <Grupa>932</Grupa>
     </student>
+    <student ID="13">
+        <Nume>aaa</Nume>
+        <Grupa>932</Grupa>
+    </student>
+    <student ID="15">
+        <Nume>aaa</Nume>
+        <Grupa>937</Grupa>
+    </student>
 </Entitati>

@@ -5,6 +5,8 @@ import lab2testing.repository.TemaXMLRepository;
 import lab2testing.service.Service;
 import lab2testing.validation.TemaValidator;
 
+import static junit.framework.TestCase.assertEquals;
+
 /**
  * Unit test for simple App.
  */
@@ -40,7 +42,7 @@ public class AppTest {
 
     @Test
     public void addAssignmentWithOkDescription() {
-        assert 0 == service.saveTema("2", "Scurt/2.", 10, 2);
+        assertEquals(0, service.saveTema("2", "Scurt/2.", 10, 2));
     }
 
     @Test

@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Entitati>
-    <tema ID="1">
-        <Descriere>Scurt.</Descriere>
+    <tema ID="100">
+        <Descriere>Skip</Descriere>
         <Deadline>10</Deadline>
+        <Startline>2</Startline>
+    </tema>
+    <tema ID="2">
+        <Descriere>lung.</Descriere>
+        <Deadline>10</Deadline>
+        <Startline>2</Startline>
+    </tema>
+    <tema ID="3">
+        <Descriere>Scurt/2.</Descriere>
+        <Deadline>6</Deadline>
         <Startline>2</Startline>
     </tema>
 </Entitati>
